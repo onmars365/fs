@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我的飞书多维表格博客</title>
+    <style>
+        body { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .article-item { margin: 20px 0; padding: 10px; border-bottom: 1px solid #eee; }
+        .tags { color: #666; font-size: 14px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>我的博客</h1>
+    {% for article in articles %}
+    <div class="article-item">
+        <h2><a href="./{{ article.article_slug }}.html">{{ article.article_title }}</a></h2>
+        <div class="date">{{ article.publish_date }}</div>
+        <div class="tags">标签：{{ ','.join(article.tags) }}</div>
+    </div>
+    {% endfor %}
+</body>
+</html>
