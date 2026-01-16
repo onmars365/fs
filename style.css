@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+/* 首页列表样式 */
+.post-list {
+  margin-top: 30px;
+}
+.post-item {
+  padding: 20px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+.post-item h2 {
+  margin-bottom: 10px;
+}
+.post-item a {
+  color: #2563eb;
+  text-decoration: none;
+}
+.post-meta {
+  color: #666;
+  font-size: 14px;
+  margin: 10px 0;
+}
+/* 详情页样式 */
+.post-detail h1 {
+  margin-bottom: 20px;
+}
+.post-content {
+  line-height: 1.8;
+  margin-top: 20px;
+}
+.tag {
+  display: inline-block;
+  background: #e6f7ff;
+  color: #1890ff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-right: 5px;
+}
