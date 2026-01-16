@@ -1,0 +1,52 @@
+name: 自动构建并部署博客
+
+on:
+  # 手动触发
+  workflow_dispatch:
+  # 定时触发（每天凌晨2点，时区UTC+8）
+  schedule:
+    - cron: '0 18 * * *'
+  # 仓库push时触发（可选）
+  push:
+    branches: [ main ]
+    paths:
+      - 'scripts/**'
+      - 'templates/**'
+      - '.github/workflows/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 拉取仓库代码
+      - name: 克隆仓库
+        uses: actions/checkout@v4
+
+      # 2. 配置Python环境
+      - name: 设置Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # 3. 安装依赖
+      - name: 安装依赖包
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. 运行脚本生成静态页面
+      - name: 生成博客页面
+        env:
+          FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
+          FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
+          FEISHU_APP_TOKEN: ${{ secrets.FEISHU_APP_TOKEN }}
+          FEISHU_TABLE_ID: ${{ secrets.FEISHU_TABLE_ID }}
+        run: python scripts/generate_blog.py
+
+      # 5. 部署到GitHub Pages
+      - name: 部署到GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs  # 指向生成的静态页面目录
+          publish_branch: main # 部署到main分支（也可选gh-pages）
