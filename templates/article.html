@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.article_title }} - 我的博客</title>
+    <style>
+        body { max-width: 800px; margin: 0 auto; padding: 20px; }
+        .content { margin-top: 20px; line-height: 1.8; }
+        .meta { color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h1>{{ article.article_title }}</h1>
+    <div class="meta">
+        发布日期：{{ article.publish_date }} | 标签：{{ ','.join(article.tags) }}
+    </div>
+    <hr>
+    <div class="content">{{ article.article_content|safe }}</div>
+    <br>
+    <a href="./index.html">返回首页</a>
+</body>
+</html>
